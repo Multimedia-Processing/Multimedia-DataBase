@@ -1,5 +1,8 @@
-# DataBase中不會紀錄到的東西
+# 不紀錄多媒體的資料，以防Git掛掉
 object/*/
+temp/*
+info/*
+feature/*
 *.mp4
 *.mp3
 
