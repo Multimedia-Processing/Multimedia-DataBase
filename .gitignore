@@ -1,5 +1,7 @@
-# DataBase內容
-object/
+# DataBase中不會紀錄到的東西
+object/*/
+*.mp4
+*.mp3
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
