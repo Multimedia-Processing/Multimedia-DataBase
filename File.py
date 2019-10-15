@@ -3,7 +3,7 @@ from hashlib import sha256
 
 
 class blockfile():
-    def save_block(self, block, path='../Blockchain/objects/'):
+    def save_block(self, block, path='../.temp/'):
         filename = sha256(block.encode('utf8')).hexdigest()
         f = open(path + filename, 'w', encoding='utf8')
         f.write(block)
