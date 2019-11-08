@@ -61,11 +61,29 @@ class HashMultimedia():
         for multimediafile in multimedia_list:
             os.remove(path + multimediafile)
 
-    def read_multimedia(self, path='./.temp/',
-                        encoding=None, mode="rb", size=1):
+    def read_multimedia_dir(
+            self, path='./.temp/', encoding=None, mode="rb", size=1):
+        """
+        讀取指定路徑底下檔案的檔名.
+
+        讀取指定的多媒體時會以二進位的方式讀取，當然還是可以決定使用的編碼方式。
+        """
+        multimedia = list()
+        multimedias = os.listdir(path)
+        for media in multimedias:
+            media = self.read_file(path=path + media,
+                                   encoding=encoding, mode=mode, size=size)
+            multimedia.append(media)
+        return multimedia
+
+    def read_multimedia_hash(
+            self, path='./.temp/', encoding=None, mode="rb", size=1):
         """
         讀取指定檔案或指定路徑底下的多媒體.
 
+        讀取指定路徑底下檔案的檔名.
+
+        讀取指定的多媒體時會以二進位的方式讀取，當然還是可以決定使用的編碼方式。
         讀取指定的多媒體時會因為每一種使用的編碼都不同，因此會使用二進位的方式讀取，來
         解決這個問題，但因為可能檔案過於龐大，因此會需要一些方式解決。
         """
@@ -79,3 +97,20 @@ class HashMultimedia():
         else:
             multimedia.append(media)
         return multimedia
+
+    def save_multimedia(self, input_path='./.temp/',
+                        multimedias=None, encoding=None, mode="wb", size=1):
+        """
+        將檔案搭配檔案的雜湊值檔名存入.
+
+        檔案名稱串列或Tuple去尋找目錄底下的檔案，經過雜湊計算後將檔案放入指定的路徑底下
+        取指定的多媒體時會因為每一種使用的編碼都不同，因此會使用二進位的方式讀取，來
+        解決這個問題，但因為可能檔案過於龐大，因此會需要一些方式解決。
+        """
+        if multimedias is None:
+            multimedias = []
+
+        for multimedia in multimedias:
+            multimedia = self.read_file(path=input_path + multimedia,
+                                        encoding=encoding, mode=mode,
+                                        size=size)
