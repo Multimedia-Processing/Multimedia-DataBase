@@ -17,17 +17,12 @@ class HashMultimedia():
     提供讀取、寫入、輸出等自動化操作，並提供API使用.
     """
 
-    def __init__(self, hash_function=None, encoding=None, mode="rb", size=-1):
+    def __init__(self, encoding=None, mode="rb", size=-1):
         """
         初始化類別.
 
         選擇自己喜歡的雜湊函數，提供其他函式使用。
         """
-        if hash_function is None:
-            self.hash_function = sha256()
-        else:
-            self.hash_function = hash_function
-
         self.encoding = encoding
         self.mode = mode
         self.size = size
@@ -43,15 +38,16 @@ class HashMultimedia():
         text = open(path, mode=mode, encoding=encoding)
         return text.read(size)
 
-    def save_file(self, text, path='./.temp/', encoding=None, mode='wb'):
+    @classmethod
+    def save_file(cls, text,
+                  path='./.mmdb/object/', encoding=None, mode='wb'):
         """
         雜湊二進位檔案後存檔.
 
         針對輸入的文字雜湊儲存成雜湊值名稱檔案。
         輸入文字、存檔路徑、編碼格式轉成沒有檔名為雜湊值且沒有副檔名。
         """
-        hash_function = self.hash_function
-        filename = hash_function(text).hexdigest()
+        filename = sha256(text).hexdigest()
         file = open(path + filename, mode=mode, encoding=encoding)
         file.write(text)
 
@@ -114,7 +110,3 @@ class HashMultimedia():
         for multimedia in multimedias:
             self.multimedia_hash(input_path=input_path + multimedia,
                                  output_path=output_path)
-
-
-HM = HashMultimedia()
-HM.multimedia_folder_hash()
