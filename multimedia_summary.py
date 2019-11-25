@@ -38,8 +38,7 @@ class HashMultimedia():
         text = open(path, mode=mode, encoding=encoding)
         return text.read(size)
 
-    @classmethod
-    def save_file(cls, text,
+    def save_file(self, text,
                   path='./.mmdb/object/', encoding=None, mode='wb'):
         """
         雜湊二進位檔案後存檔.
@@ -47,8 +46,8 @@ class HashMultimedia():
         針對輸入的文字雜湊儲存成雜湊值名稱檔案。
         輸入文字、存檔路徑、編碼格式轉成沒有檔名為雜湊值且沒有副檔名。
         """
-        filename = sha256(text).hexdigest()
-        file = open(path + filename, mode=mode, encoding=encoding)
+        self.filename = sha256(text).hexdigest()
+        file = open(path + self.filename, mode=mode, encoding=encoding)
         file.write(text)
 
     @classmethod
@@ -98,6 +97,7 @@ class HashMultimedia():
                        path=output_path,
                        encoding=self.encoding,
                        mode=self.mode)
+        print(input_path, self.filename)
 
     def multimedia_folder_hash(self, input_path='./.temp/',
                                output_path='./.mmdb/object/'):
@@ -110,3 +110,8 @@ class HashMultimedia():
         for multimedia in multimedias:
             self.multimedia_hash(input_path=input_path + multimedia,
                                  output_path=output_path)
+
+
+HM = HashMultimedia()
+
+HM.multimedia_folder_hash()
