@@ -26,6 +26,7 @@ class HashMultimedia():
         self.encoding = encoding
         self.mode = mode
         self.size = size
+        self.hashfilename = None
 
     @classmethod
     def read_file(cls, path='./.temp/None.mp4',
@@ -46,8 +47,8 @@ class HashMultimedia():
         針對輸入的文字雜湊儲存成雜湊值名稱檔案。
         輸入文字、存檔路徑、編碼格式轉成沒有檔名為雜湊值且沒有副檔名。
         """
-        self.filename = sha256(text).hexdigest()
-        file = open(path + self.filename, mode=mode, encoding=encoding)
+        self.hashfilename = sha256(text).hexdigest()
+        file = open(path + self.hashfilename, mode=mode, encoding=encoding)
         file.write(text)
 
     @classmethod
@@ -97,7 +98,13 @@ class HashMultimedia():
                        path=output_path,
                        encoding=self.encoding,
                        mode=self.mode)
-        print(input_path, self.filename)
+        filename = ""
+        i = -1
+        while input_path[i] != "/":
+            i -= 1
+        filename = input_path[i + 1:]
+
+        print(filename, self.hashfilename)
 
     def multimedia_folder_hash(self, input_path='./.temp/',
                                output_path='./.mmdb/object/'):
