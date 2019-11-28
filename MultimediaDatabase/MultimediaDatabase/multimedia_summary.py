@@ -8,6 +8,7 @@
 
 import os
 from hashlib import sha256
+import csv
 
 
 class HashMultimedia():
@@ -27,6 +28,7 @@ class HashMultimedia():
         self.mode = mode
         self.size = size
         self.hashfilename = None
+        self.filename = None
 
     @classmethod
     def read_file(cls, path='./.temp/None.mp4',
@@ -119,7 +121,28 @@ class HashMultimedia():
             self.multimedia_hash(input_path=input_path + multimedia,
                                  output_path=output_path)
 
+    def multimedia_folder_hash_csv(self, input_path='./.temp/',
+                                   output_path='./.mmdb/object/',
+                                   save_path='./.mmdb/info/info.csv'):
+        """
+        檔案與雜湊值對應CSV.
+
+        將檔案雜湊後得出的雜湊值與檔名搭配後存入CSV檔
+        """
+        multimedias = self.scan_folder(path=input_path)
+        for multimedia in multimedias:
+            self.multimedia_hash(input_path=input_path + multimedia,
+                                 output_path=output_path)
+
+            with open(save_path,
+                      mode='a', newline='', encoding='utf8') as csvfile:
+                # 建立 CSV 檔寫入器g
+                writer = csv.writer(csvfile)
+
+                # 寫入一列資料
+                writer.writerow([self.filename, self.hashfilename])
+
 
 HM = HashMultimedia()
 
-HM.multimedia_folder_hash()
+HM.multimedia_folder_hash_csv()
