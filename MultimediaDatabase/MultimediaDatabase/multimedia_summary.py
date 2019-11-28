@@ -36,8 +36,8 @@ class HashMultimedia():
 
         指定檔案路徑，將裡面的內容依照參數回傳。
         """
-        text = open(path, mode=mode, encoding=encoding)
-        return text.read(size)
+        with open(path, mode=mode, encoding=encoding) as text:
+            return text.read(size)
 
     def save_file(self, text,
                   path='./.mmdb/object/', encoding=None, mode='wb'):
@@ -48,8 +48,9 @@ class HashMultimedia():
         輸入文字、存檔路徑、編碼格式轉成沒有檔名為雜湊值且沒有副檔名。
         """
         self.hashfilename = sha256(text).hexdigest()
-        file = open(path + self.hashfilename, mode=mode, encoding=encoding)
-        file.write(text)
+        with open(path + self.hashfilename,
+                  mode=mode, encoding=encoding) as file:
+            file.write(text)
 
     @classmethod
     def scan_folder(cls, path='./.temp/'):
