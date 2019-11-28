@@ -140,7 +140,7 @@ class HashMultimedia():
                 writer = csv.writer(csvfile)
 
                 # 寫入一列資料
-                writer.writerow([self.filename, self.hashfilename])
+                writer.writerow([self.hashfilename, self.filename])
 
 
 HM = HashMultimedia()
