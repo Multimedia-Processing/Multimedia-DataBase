@@ -143,6 +143,7 @@ class HashMultimedia():
                 writer.writerow([self.hashfilename, self.filename])
 
 
-HM = HashMultimedia()
+if __name__ == '__main__':
+    HM = HashMultimedia()
 
-HM.multimedia_folder_hash_csv()
+    HM.multimedia_folder_hash_csv()
