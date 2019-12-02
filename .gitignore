@@ -1,8 +1,9 @@
 # 不紀錄多媒體的資料，以防Git掛掉
-.temp/*
-.mmdb/*
+/MultimediaDatabase/.temp/*
+/MultimediaDatabase/.mmdb/*
 *.mp4
 *.mp3
+*.vob
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
