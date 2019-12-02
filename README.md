@@ -1,5 +1,4 @@
-Multimedia-DataBase
-===
+#多媒體資料庫
 
 AVI + ACC ，音訊會大量的延展
 MP4 + ACC ，音訊會斷斷續續
