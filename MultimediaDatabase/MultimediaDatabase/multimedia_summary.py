@@ -31,7 +31,7 @@ class HashMultimedia():
         self.filename = None
 
     @classmethod
-    def read_file(cls, path='./.temp/None.mp4',
+    def read_file(cls, path='../.temp/None.mp4',
                   encoding=None, mode='rb', size=-1):
         """
         讀取文件檔案並計算雜湊值.
@@ -42,7 +42,7 @@ class HashMultimedia():
             return text.read(size)
 
     def save_file(self, text,
-                  path='./.mmdb/object/', encoding=None, mode='wb'):
+                  path='../.mmdb/object/', encoding=None, mode='wb'):
         """
         雜湊二進位檔案後存檔.
 
@@ -55,7 +55,7 @@ class HashMultimedia():
             file.write(text)
 
     @classmethod
-    def scan_folder(cls, path='./.temp/'):
+    def scan_folder(cls, path='../.temp/'):
         """
         掃描目錄底下的檔案名稱並回傳.
 
@@ -65,7 +65,7 @@ class HashMultimedia():
         return multimedias
 
     @classmethod
-    def remove_file(cls, path="./.temp/None.mp4"):
+    def remove_file(cls, path="../.temp/None.mp4"):
         """
         刪除指定路徑的目錄內檔案.
 
@@ -73,7 +73,7 @@ class HashMultimedia():
         """
         os.remove(path)
 
-    def remove_folder(self, path="./.temp/"):
+    def remove_folder(self, path="../.temp/"):
         """
         刪除指定路徑的目錄內檔案.
 
@@ -83,8 +83,8 @@ class HashMultimedia():
         for multimedia in multimedias:
             self.remove_file(path + multimedia)
 
-    def multimedia_hash(self, input_path='./.temp/None.mp4',
-                        output_path='./.mmdb/object/'):
+    def multimedia_hash(self, input_path='../.temp/None.mp4',
+                        output_path='../.mmdb/object/'):
         """
         雜湊指定的多媒體.
 
@@ -109,8 +109,8 @@ class HashMultimedia():
 
         print(filename, self.hashfilename)
 
-    def multimedia_folder_hash(self, input_path='./.temp/',
-                               output_path='./.mmdb/object/'):
+    def multimedia_folder_hash(self, input_path='../.temp/',
+                               output_path='../.mmdb/object/'):
         """
         自動化目錄雜湊.
 
@@ -121,9 +121,9 @@ class HashMultimedia():
             self.multimedia_hash(input_path=input_path + multimedia,
                                  output_path=output_path)
 
-    def multimedia_folder_hash_csv(self, input_path='./.temp/',
-                                   output_path='./.mmdb/object/',
-                                   save_path='./.mmdb/info/info.csv'):
+    def multimedia_folder_hash_csv(self, input_path='../.temp/',
+                                   output_path='../.mmdb/object/',
+                                   save_path='../.mmdb/info/info.csv'):
         """
         檔案與雜湊值對應CSV.
 
