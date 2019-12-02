@@ -20,17 +20,18 @@ cache:
 
 before_script:
   - python -V  # Print out python version for debugging
-  - python -m pip install --upgrade pip
   - pip install virtualenv
   - virtualenv venv
   - source venv/bin/activate
+  - python -m pip install --upgrade pip
 
 test:
   script:
-    - pip install pytest flake8 pylint # you can also use tox
-    - pytest ./*.py
-    - flake8 ./*.py
-    - pylint ./*.py
+    - pip install mypy flake8 pylint pytest --upgrade
+    - mypy .
+    - flake8 .
+    - pylint .
+    - pytest -vv tests/
 
 pages:
   script:
