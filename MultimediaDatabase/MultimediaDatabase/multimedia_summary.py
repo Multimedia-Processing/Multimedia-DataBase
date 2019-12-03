@@ -101,13 +101,13 @@ class HashMultimedia():
                        path=output_path,
                        encoding=self.encoding,
                        mode=self.mode)
-        filename = ""
+        self.filename = ""
         i = -1
         while input_path[i] != "/":
             i -= 1
-        filename = input_path[i + 1:]
+        self.filename = input_path[i + 1:]
 
-        print(filename, self.hashfilename)
+        print(self.filename, self.hashfilename)
 
     def multimedia_folder_hash(self, input_path='../.temp/',
                                output_path='../.mmdb/object/'):
