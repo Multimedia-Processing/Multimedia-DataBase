@@ -84,7 +84,9 @@ class HashMultimedia():
             self.remove_file(path + multimedia)
 
     def multimedia_hash(self, input_path='./.temp/None.mp4',
-                        output_path='./.mmdb/object/'):
+                        output_path='./.mmdb/object/',
+                        file=True,
+                        folder=False):
         """
         雜湊指定的多媒體.
 
@@ -101,13 +103,18 @@ class HashMultimedia():
                        path=output_path,
                        encoding=self.encoding,
                        mode=self.mode)
-        filename = ""
-        i = -1
-        while input_path[i] != "/":
-            i -= 1
-        filename = input_path[i + 1:]
+        if folder or file is True:
+            if folder is True:
+                self.filename = input_path
 
-        print(filename, self.hashfilename)
+            elif file is True:
+                self.filename = ""
+                i = -1
+                while input_path[i] != "/":
+                    i -= 1
+                self.filename = input_path[i + 1:]
+
+            print(self.filename, self.hashfilename)
 
     def multimedia_folder_hash(self, input_path='./.temp/',
                                output_path='./.mmdb/object/'):
@@ -141,8 +148,3 @@ class HashMultimedia():
 
                 # 寫入一列資料
                 writer.writerow([self.hashfilename, self.filename])
-
-
-HM = HashMultimedia()
-
-HM.multimedia_folder_hash_csv()
