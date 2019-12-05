@@ -6,8 +6,49 @@
 
 
 from MediaInfo import MediaInfo
+from multimedia_summary import HashMultimedia
 
 
-INFO = MediaInfo(filename='../.temp/None.mp4')
-INFO_DATA = INFO.getInfo()
-print(INFO_DATA)
+HM = HashMultimedia()
+
+
+class MultimediaInfo():
+    """
+    讀取多媒體資料.
+
+    讀取多媒體資料後使用YAML語言儲存資訊的函式庫。
+    """
+
+    def __init__(self):
+        """
+        初始化.
+
+        初始化
+        """
+        self.info_data = None
+
+    def read_file_info(self, path='../.temp/2879992.mp4'):
+        """
+        多媒體資訊.
+
+        顯示多媒體資訊，目前只有影片、聲音。
+        """
+        info = MediaInfo(filename=path)
+        self.info_data = info.getInfo()
+        print(self.info_data)
+
+    def read_folder_info(self, path='../.temp/'):
+        """
+        目錄下多媒體資訊.
+
+        讀取指定的目錄下所有的媒體的資訊。
+        """
+        multimedias = HM.scan_folder(path=path)
+        for multimedia in multimedias:
+            self.read_file_info(path + multimedia)
+
+
+if __name__ == '__main__':
+    HI = MultimediaInfo()
+    HI.read_file_info()
+    HI.read_folder_info()
