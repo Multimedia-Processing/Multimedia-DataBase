@@ -6,7 +6,7 @@
 
 
 from MediaInfo import MediaInfo
-from multimedia_summary import HashMultimedia
+from .multimedia_summary import HashMultimedia
 
 
 HM = HashMultimedia()
@@ -27,7 +27,7 @@ class MultimediaInfo():
         """
         self.info_data = None
 
-    def read_file_info(self, path='../.temp/2879992.mp4'):
+    def read_file_info(self, path='../.temp/None.mp4'):
         """
         多媒體資訊.
 
@@ -49,6 +49,6 @@ class MultimediaInfo():
 
 
 if __name__ == '__main__':
-    HI = MultimediaInfo()
-    HI.read_file_info()
-    HI.read_folder_info()
+    MI = MultimediaInfo()
+    MI.read_file_info()
+    MI.read_folder_info()
