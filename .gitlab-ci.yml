@@ -23,15 +23,28 @@ before_script:
   - pip install virtualenv
   - virtualenv venv
   - source venv/bin/activate
-  - python -m pip install --upgrade pip
+  - python -m pip install pip --upgrade
 
-test:
+mypy:
   script:
-    - pip install mypy flake8 pylint pytest --upgrade
+    - pip install mypy  # you can flake8
     - mypy .
+
+flake8:
+  script:
+    - pip install flake8  # you can flake8
     - flake8 .
-    - pylint .
-    - pytest -vv tests/
+
+pytest:
+  script:
+    - pip install pytest  # you can pytest
+    - pytest -v MultimediaDatabase/manage.py
+
+pylint:
+  script:
+    - pip install pylint  # you can pytest
+    - pylint -v MultimediaDatabase/manage.py
+    - pylint -v MultimediaDatabase/multimedia_database/
 
 pages:
   script:
