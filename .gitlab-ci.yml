@@ -27,7 +27,7 @@ before_script:
 flake8:
   script:
     - pip install flake8  # you can flake8
-    - flake8 .
+    - flake8 MultimediaDatabase/
 
 pytest:
   script:
