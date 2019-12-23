@@ -7,6 +7,7 @@
 
 from MediaInfo import MediaInfo
 from .multimedia_summary import HashMultimedia
+import yaml
 
 
 HM = HashMultimedia()
@@ -35,7 +36,7 @@ class MultimediaInfo():
         """
         info = MediaInfo(filename=path)
         self.info_data = info.getInfo()
-        print(self.info_data)
+        return self.info_data
 
     def read_folder_info(self, path='../.temp/'):
         """
@@ -46,6 +47,17 @@ class MultimediaInfo():
         multimedias = HM.scan_folder(path=path)
         for multimedia in multimedias:
             self.read_file_info(path + multimedia)
+
+    def save_info_yaml(self, media_path='../.temp/None.mp4',
+                       save_path='../.mmdb/info/'):
+        """
+        儲存媒體資訊.
+
+        將指定媒體在讀取資訊後將YAML儲存到指定的目錄底下。
+        """
+        data = self.read_file_info(path=media_path)
+        stream = open('document.yaml', 'a')
+        yaml.dump(data, stream)
 
 
 if __name__ == '__main__':
