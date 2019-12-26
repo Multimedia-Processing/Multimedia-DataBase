@@ -24,19 +24,26 @@ before_script:
   - virtualenv venv
   - source venv/bin/activate
 
+build:
+  script:
+    - pip install flake8
+    - pip install pytest
+    - pip install pylint
+    - pip install PyYAML
+    - pip install MediaInfo
+    - pip install libmediainfo-cffi
+    - pip install pymediainfo
+
 flake8:
   script:
-    - pip install flake8  # you can flake8
     - flake8 MultimediaDatabase/
 
 pytest:
   script:
-    - pip install pytest  # you can pytest
     - pytest -v MultimediaDatabase/manage.py
 
 pylint:
   script:
-    - pip install pylint  # you can pytest
     - pylint -v MultimediaDatabase/manage.py
     - pylint -v MultimediaDatabase/multimedia_database/
 
