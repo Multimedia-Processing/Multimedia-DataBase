@@ -34,7 +34,6 @@ build:
     - pip install libmediainfo-cffi
     - pip install pymediainfo
     - pip install ruamel.yaml
-    -
 
 flake8:
   script:
