@@ -5,9 +5,10 @@
 """
 
 
+import csv
+import yaml
 from MediaInfo import MediaInfo
 from .multimedia_summary import HashMultimedia
-import yaml
 
 
 HM = HashMultimedia()
@@ -59,8 +60,51 @@ class MultimediaInfo():
         stream = open('document.yaml', 'a')
         yaml.dump(data, stream)
 
+    def multimedia_folder_hash_csv(self, input_path='../.temp/',
+                                   output_path='../.mmdb/object/',
+                                   save_path='../.mmdb/info/info.csv'):
+        """
+        檔案與雜湊值對應CSV.
+
+        將檔案雜湊後得出的雜湊值與檔名搭配後存入CSV檔
+        """
+        multimedias = HM.scan_folder(path=input_path)
+        for multimedia in multimedias:
+            HM.multimedia_hash(input_path=input_path + multimedia,
+                               output_path=output_path)
+
+            with open(save_path,
+                      mode='a', newline='', encoding='utf8') as csvfile:
+                # 建立 CSV 檔寫入器g
+                writer = csv.writer(csvfile)
+
+                # 寫入一列資料
+                writer.writerow([HM.hashfilename, HM.filename])
+
+    def multimedia_folder_hash_yaml(self, input_path='../.temp/',
+                                    output_path='../.mmdb/object/',
+                                    save_path='../.mmdb/info/info.csv'):
+        """
+        檔案、雜湊值與檔案資訊資料表.
+
+        將檔案雜湊後得出的雜湊值與檔名搭配後存入YAML。
+        """
+        multimedias = HM.scan_folder(path=input_path)
+        for multimedia in multimedias:
+            HM.multimedia_hash(input_path=input_path + multimedia,
+                               output_path=output_path)
+
+            with open(save_path,
+                      mode='a', newline='', encoding='utf8') as csvfile:
+                # 建立 CSV 檔寫入器g
+                writer = csv.writer(csvfile)
+
+                # 寫入一列資料
+                writer.writerow([HM.hashfilename, HM.filename])
+
 
 if __name__ == '__main__':
     MI = MultimediaInfo()
     MI.read_file_info()
     MI.read_folder_info()
+    MI.multimedia_folder_hash_csv()
