@@ -1,9 +1,16 @@
 #多媒體資料庫
+參照Git運作方式，但不會一樣，但希望可以直接引用Git去執行這個，但修改部份功能，會用Python做運作的方式，可以利用Python產生對應的資料。
 
-AVI + ACC ，音訊會大量的延展
-MP4 + ACC ，音訊會斷斷續續
-MP4 + MP3 ，音訊正常，需要調整時間的延遲
-
-參照Git
-但不一定一樣，會用Python做運作的方式
-可以利用Python產生對應的資料
+## 目錄結構
+資料庫結構
+```
+__mmdb__ --- table --- table name.yaml --- file hash
+          |                             |- file name
+          |- object --- multimedia object
+                     |- info object
+                     |- feature object
+```
+暫存目錄結構
+```
+__mpdlcache__
+```
