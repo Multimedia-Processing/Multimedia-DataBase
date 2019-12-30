@@ -10,8 +10,8 @@ from .multimedia_info import MultimediaInfo
 from .multimedia_summary import HashMultimedia
 
 
-class MultimediaDatabase():
-    """Multimedia Database."""
+MI = MultimediaInfo()
+HM = HashMultimedia()
 
     def save_info_yaml(self, media_path='../.temp/None.mp4',
                        save_path='../.mmdb/info/'):
