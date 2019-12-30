@@ -1,6 +1,8 @@
 # 不紀錄多媒體的資料，以防Git掛掉
-/MultimediaDatabase/.temp/*
-/MultimediaDatabase/.mmdb/*
+.temp/
+__mpdlcache__/
+.mmdb/
+__mmdb__/
 *.mp4
 *.mp3
 *.vob
