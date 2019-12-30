@@ -82,3 +82,8 @@ class Insert():
 
                 # 寫入一列資料
                 writer.writerow([HM.hashfilename, HM.filename])
+
+
+if __name__ == '__main__':
+    MMDB = Insert()
+    MMDB.multimedia_folder_hash_csv()
