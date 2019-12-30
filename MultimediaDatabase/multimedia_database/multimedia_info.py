@@ -24,6 +24,7 @@ class MultimediaInfo():
         初始化
         """
         self.info_data = None
+        self.data_list = None
 
     def read_file_info(self, path='../.temp/None.mp4'):
         """
@@ -42,8 +43,11 @@ class MultimediaInfo():
         讀取指定的目錄下所有的媒體的資訊。
         """
         multimedias = HM.scan_folder(path=path)
+        self.data_list = list()
         for multimedia in multimedias:
-            self.read_file_info(path + multimedia)
+            data = self.read_file_info(path + multimedia)
+            self.data_list.append(data)
+        return self.data_list
 
 
 if __name__ == '__main__':
