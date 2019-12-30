@@ -13,8 +13,23 @@ from .multimedia_summary import HashMultimedia
 MI = MultimediaInfo()
 HM = HashMultimedia()
 
-    def save_info_yaml(self, media_path='../.temp/None.mp4',
-                       save_path='../.mmdb/info/'):
+
+class Insert():
+    """
+    Insert.
+
+    新增多媒體資料到資料庫。
+    """
+
+    def __init__(self, mmdb_path='../__mmdb__/',
+                 mpdlcache_path='../__mpdlcache__/'):
+        """類別初始化."""
+        self.mmdb_path = mmdb_path
+        self.mpdlcache_path = mpdlcache_path
+        self.mmdb_path_object = "object/"
+        self.mmdb_path_table = "table/"
+
+    def save_info_yaml(self, media_path='../__mpdlcache__/None.mp4'):
         """
         儲存媒體資訊.
 
