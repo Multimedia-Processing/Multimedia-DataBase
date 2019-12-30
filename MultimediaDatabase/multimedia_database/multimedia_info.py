@@ -48,4 +48,3 @@ class MultimediaInfo():
 
 if __name__ == '__main__':
     MI = MultimediaInfo()
-    MI.multimedia_folder_hash_csv()
