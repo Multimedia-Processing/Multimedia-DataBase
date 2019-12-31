@@ -41,7 +41,8 @@ class Insert():
                      path=self.mmdb_path_object, encoding='utf8')
         return HM.hashfilename
 
-    def multimedia_folder_hash_csv(self, input_path='../.temp/',
+    @classmethod
+    def multimedia_folder_hash_csv(cls, input_path='../.temp/',
                                    output_path='../.mmdb/object/',
                                    save_path='../.mmdb/info/info.csv'):
         """
@@ -62,7 +63,8 @@ class Insert():
                 # 寫入一列資料
                 writer.writerow([HM.hashfilename, HM.filename])
 
-    def multimedia_folder_hash_yaml(self, input_path='../.temp/',
+    @classmethod
+    def multimedia_folder_hash_yaml(cls, input_path='../.temp/',
                                     output_path='../.mmdb/object/',
                                     save_path='../.mmdb/info/info.csv'):
         """
