@@ -30,10 +30,8 @@ build:
     - pip install pytest
     - pip install pylint
     - pip install PyYAML
-    - pip install MediaInfo
-    - pip install libmediainfo-cffi
-    - pip install pymediainfo
     - pip install ruamel.yaml
+    - pip install PyProbe
 
 flake8:
   script:
@@ -41,11 +39,11 @@ flake8:
 
 pytest:
   script:
-    - pytest -v MultimediaDatabase/manage.py
+    - pytest -vs MultimediaDatabase/test.py
 
 pylint:
   script:
-    - pylint -v MultimediaDatabase/manage.py
+    - pylint -v MultimediaDatabase/test.py
     - pylint -v MultimediaDatabase/multimedia_database/
 
 pages:
@@ -57,4 +55,4 @@ pages:
     paths:
       - public
   only:
-    - master
+    - develop
