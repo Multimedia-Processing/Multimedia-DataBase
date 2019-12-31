@@ -19,6 +19,7 @@ cache:
     - venv/
 
 before_script:
+  - sudo apt-get install ffmpeg
   - python -V  # Print out python version for debugging
   - pip install virtualenv
   - virtualenv venv
@@ -31,28 +32,6 @@ mypy:
   script:
     - pip install mypy  # you can flake8
     - mypy .
-
-build:
-  script:
-    - pip install flake8
-    - pip install pytest
-    - pip install pylint
-    - pip install PyYAML
-    - pip install MediaInfo
-    - pip install libmediainfo-cffi
-    - pip install pymediainfo
-    - pip install ruamel.yaml
-    -
-
-build:
-  script:
-    - pip install flake8
-    - pip install pytest
-    - pip install pylint
-    - pip install PyYAML
-    - pip install MediaInfo
-    - pip install libmediainfo-cffi
-    - pip install pymediainfo
 
 flake8:
   script:

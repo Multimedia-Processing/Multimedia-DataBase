@@ -1,3 +1,7 @@
 PyYAML
 ruamel.yaml
 PyProbe
+MediaInfo
+libmediainfo-cffi
+pymediainfo
+ruamel.yaml
