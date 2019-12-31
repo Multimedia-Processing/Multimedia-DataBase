@@ -26,7 +26,7 @@ class MultimediaInfo():
         self.info_data = None
         self.data_list = None
 
-    def read_file_info(self, path='../.temp/None.mp4'):
+    def read_file_info(self, path='../__mpdlcache__/None.mp4', **kwargs):
         """
         多媒體資訊.
 
@@ -34,7 +34,20 @@ class MultimediaInfo():
         """
         info = MediaInfo(filename=path)
         self.info_data = info.getInfo()
-        return self.info_data
+        kwargs.setdefault('hash_value', None)
+        kwargs.setdefault('name', None)
+        kwargs.setdefault('info', self.info_data)
+        kwargs.setdefault('feature', None)
+        if kwargs['name'] is None:
+            no_path = -1
+            while path[no_path] != "/":
+                no_path -= 1
+            no_filename_extension = -1
+            while path[no_filename_extension] != ".":
+                no_filename_extension -= 1
+            name = path[no_path + 1:no_filename_extension]
+            kwargs.update({'name': name})
+        return kwargs
 
     def read_folder_info(self, path='../.temp/'):
         """
