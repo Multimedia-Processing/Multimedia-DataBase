@@ -34,7 +34,7 @@ class MultimediaInfo():
         """
         info = MediaInfo(filename=path)
         self.info_data = info.getInfo()
-        kwargs.setdefault('hash_value', None)
+        kwargs.setdefault('hash', None)
         kwargs.setdefault('name', None)
         kwargs.setdefault('info', self.info_data)
         kwargs.setdefault('feature', None)
