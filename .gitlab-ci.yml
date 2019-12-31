@@ -19,6 +19,7 @@ cache:
     - venv/
 
 before_script:
+  - sudo apt-get install ffmpeg
   - python -V  # Print out python version for debugging
   - pip install virtualenv
   - virtualenv venv
