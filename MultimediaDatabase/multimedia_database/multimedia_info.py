@@ -3,7 +3,7 @@
 
 將不同類型的媒體讀取資訊後儲存在物件區並搭配上資料表
 """
-from MediaInfo import MediaInfo
+from pyprobe import VideoFileParser
 from .multimedia_summary import HashMultimedia
 
 
@@ -26,14 +26,17 @@ class MultimediaInfo():
         self.info_data = None
         self.data_list = None
 
-    def read_file_info(self, path='../__mpdlcache__/None.mp4', **kwargs):
+    def read_file_info(self, path='../__mpdlcache__/None.mp4',
+                       ffprobe="ffprobe", **kwargs):
         """
         多媒體資訊.
 
         顯示多媒體資訊，目前只有影片、聲音。
         """
-        info = MediaInfo(filename=path)
-        self.info_data = info.getInfo()
+        parser = VideoFileParser(
+            ffprobe=ffprobe, includeMissing=True, rawMode=True)
+        self.info_data = parser.parseFfprobe(path)
+        self.info_data.pop('path')
         kwargs.setdefault('hash', None)
         kwargs.setdefault('name', None)
         kwargs.setdefault('info', self.info_data)
