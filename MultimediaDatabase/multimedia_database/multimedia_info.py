@@ -49,7 +49,7 @@ class MultimediaInfo():
             kwargs.update({'name': name})
         return kwargs
 
-    def read_folder_info(self, path='../.temp/'):
+    def read_folder_info(self, path='../__mpdlcache__/'):
         """
         目錄下多媒體資訊.
 
