@@ -16,3 +16,11 @@ def test_sample1():
     if isinstance(info_data, dict):
         print(info_data)
         assert True
+
+
+def test_sample2():
+    """測試fun read_folder_info."""
+    info_data = MI.read_folder_info(path='__mpdlcache__/')
+    if isinstance(info_data, list):
+        print(info_data)
+        assert True
