@@ -23,21 +23,14 @@ before_script:
   - pip install virtualenv
   - virtualenv venv
   - source venv/bin/activate
-  - python -m pip install pip --upgrade
+  - pip install pip --upgrade
+  - pip install -r requirements.txt --upgrade
+  - pip install mypy flake8 pylint pytest --upgrade
 
 mypy:
   script:
     - pip install mypy  # you can flake8
     - mypy .
-
-build:
-  script:
-    - pip install flake8
-    - pip install pytest
-    - pip install pylint
-    - pip install PyYAML
-    - pip install ruamel.yaml
-    - pip install PyProbe
 
 flake8:
   script:
