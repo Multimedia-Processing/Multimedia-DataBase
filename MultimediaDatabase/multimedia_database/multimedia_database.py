@@ -146,9 +146,6 @@ class Insert():
         快速檢查:不重新計算object雜湊值，比對資料表。
         慢速檢查:重新計算object雜湊值，比對資料表。
         """
-        table_and_object_check = list()
-        objects = HM.scan_folder(
-            path=self.mmdb_path + self.mmdb_path_object)
         tables = HM.scan_folder(
             path=self.mmdb_path + self.mmdb_path_table)
         multimedias = HM.scan_folder(
@@ -162,9 +159,6 @@ class Insert():
                     path=table_file, mode='r', encoding='utf8')
                 data = yaml.load(yamlfile)
                 for row in data:
-                    for column in row:
-                        if row[column] in objects and row[column] is not None:
-                            table_and_object_check.append(row[column])
                     info_object = self.mmdb_path + \
                         self.mmdb_path_table + row['info']
                     yamlfile = HM.read_file(
