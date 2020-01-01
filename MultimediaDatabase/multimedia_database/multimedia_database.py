@@ -114,8 +114,25 @@ class Insert():
         save_table_path = self.mmdb_path + self.mmdb_path_table + table
         multimedias = self.check_database()
         for multimedia in multimedias:
-            HM.multimedia_hash(input_path=input_path + multimedia,
-                               output_path=output_path)
+            HM.multimedia_hash(
+                input_path=self.mpdlcache_path + multimedia,
+                output_path=self.mmdb_path + self.mmdb_path_object)
+            media_hash = HM.hashfilename
+            info_hash = self.save_info_yaml(
+                hash_value=HM.hashfilename,
+                media_path=self.mpdlcache_path + multimedia)
+            if file_extension == ".csv":
+                Create.create_table_csv(save_path=save_table_path,
+                                        hash=HM.hashfilename,
+                                        info=info_hash,
+                                        feature=None)
+
+            elif file_extension == ".yaml":
+                Create.create_table_yaml(save_path=save_table_path,
+                                         hash=media_hash,
+                                         info=info_hash,
+                                         feature=None)
+
     def check_database(self):
         """
         資料庫檢查.
