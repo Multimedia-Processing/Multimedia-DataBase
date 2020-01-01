@@ -107,18 +107,54 @@ class Insert():
 
         將檔案雜湊後得出的雜湊值與檔名搭配後存入YAML。
         """
-        multimedias = HM.scan_folder(path=input_path)
+        file_extension = HM.path_string_extraction(
+            text=table, folder=False, file=False, file_extension=True)
+        save_table_path = self.mmdb_path + self.mmdb_path_table + table
+        multimedias = self.check_database()
         for multimedia in multimedias:
             HM.multimedia_hash(input_path=input_path + multimedia,
                                output_path=output_path)
+    def check_database(self):
+        """
+        資料庫檢查.
 
-            with open(save_path,
-                      mode='a', newline='', encoding='utf8') as csvfile:
-                # 建立 CSV 檔寫入器g
-                writer = csv.writer(csvfile)
+        檢查資料表、物件以及暫存檔之間是否正確連結。
+        會先檢查資料表與物件之間的關聯，再來會確定暫存檔是否已經進資料庫。
+        階段一檢查:比對object名稱與資料表是否一致。
+        階段二檢查:比對暫存與資料表。
+        階段三檢查:回傳比對結果。
 
-                # 寫入一列資料
-                writer.writerow([HM.hashfilename, HM.filename])
+        快速檢查:不重新計算object雜湊值，比對資料表。
+        慢速檢查:重新計算object雜湊值，比對資料表。
+        """
+        table_and_object_check = list()
+        objects = HM.scan_folder(
+            path=self.mmdb_path + self.mmdb_path_object)
+        tables = HM.scan_folder(
+            path=self.mmdb_path + self.mmdb_path_table)
+        multimedias = HM.scan_folder(
+            path=self.mpdlcache_path)
+        for table in tables:
+            table_file = self.mmdb_path + self.mmdb_path_table + table
+            file_extension = HM.path_string_extraction(
+                text=table_file, folder=False, file=False, file_extension=True)
+            if file_extension == ".yaml":
+                yamlfile = HM.read_file(
+                    path=table_file, mode='r', encoding='utf8')
+                data = yaml.load(yamlfile)
+                for row in data:
+                    for column in row:
+                        if row[column] in objects and row[column] is not None:
+                            table_and_object_check.append(row[column])
+                    info_object = self.mmdb_path + \
+                        self.mmdb_path_table + row['info']
+                    yamlfile = HM.read_file(
+                        path=info_object, mode='r', encoding='utf8')
+                    info_data = yaml.load(yamlfile)
+                    name = info_data['name']
+                    if name in multimedias:
+                        multimedias.pop(name)
+        return multimedias
 
 
 if __name__ == '__main__':
