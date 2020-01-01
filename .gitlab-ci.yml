@@ -41,7 +41,8 @@ flake8:
 
 pytest:
   script:
-    - pytest -vs MultimediaDatabase/test.py
+    - cd MultimediaDatabase/
+    - pytest -vs test.py
 
 pylint:
   script:
