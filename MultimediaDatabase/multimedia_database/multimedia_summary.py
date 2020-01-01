@@ -28,6 +28,7 @@ class HashMultimedia():
         self.size = size
         self.hashfilename = None
         self.filename = None
+        self.save = True
 
     @classmethod
     def read_file(cls, path='../__mpdlcache__/None.mp4',
@@ -51,7 +52,11 @@ class HashMultimedia():
         self.hashfilename = sha256(text).hexdigest()
         with open(path + self.hashfilename,
                   mode=mode, encoding=encoding) as file:
-            file.write(text)
+            if self.save is True:
+                if mode == 'wb':
+                    file.write(text)
+                else:
+                    file.write(text.decode('utf8'))
 
     @classmethod
     def scan_folder(cls, path='../__mpdlcache__/'):
