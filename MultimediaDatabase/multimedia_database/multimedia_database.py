@@ -14,6 +14,65 @@ MI = MultimediaInfo()
 HM = HashMultimedia()
 
 
+class Create():
+    """
+    Create.
+
+    新增資料表到資料庫。
+    """
+
+    def __init__(self, mmdb_path='../__mmdb__/',
+                 mpdlcache_path='../__mpdlcache__/'):
+        """類別初始化."""
+        self.mmdb_path = mmdb_path
+        self.mpdlcache_path = mpdlcache_path
+        self.mmdb_path_object = "object/"
+        self.mmdb_path_table = "table/"
+
+    @classmethod
+    def create_table_csv(cls,
+                         save_path='__mmdb__/table/table.csv',
+                         mode='a', newline='', encoding='utf8', **kwargs,):
+        """
+        建立CSV.
+
+        將用於建立CSV檔，並提供在尾端新增資料的功能。
+        """
+        kwargs.setdefault('hash', None)
+        kwargs.setdefault('info', None)
+        kwargs.setdefault('feature', None)
+        with open(save_path,
+                  mode=mode, newline=newline, encoding=encoding) as csvfile:
+            # 建立 CSV 檔寫入器g
+            writer = csv.writer(csvfile)
+
+            # 寫入一列資料
+            writer.writerow(
+                [kwargs['hash'], kwargs['info'], kwargs['feature']])
+
+    @classmethod
+    def create_table_yaml(cls,
+                          save_path='../__mmdb__/table/Table.yaml',
+                          mode='a', newline='', encoding='utf8', **kwargs,):
+        """
+        建立YAML.
+
+        將用於建立YAML檔，並提供在尾端新增資料的功能。
+        """
+        kwargs.setdefault('hash', None)
+        kwargs.setdefault('info', None)
+        kwargs.setdefault('feature', None)
+        table = [{
+            'hash': kwargs['hash'],
+            'info': kwargs['info'],
+            'feature': kwargs['feature']
+        }]
+        with open(save_path,
+                  mode=mode, newline=newline, encoding=encoding) as yamlfile:
+            # 建立 CSV 檔寫入器
+            yaml.dump(table, yamlfile)
+
+
 class Insert():
     """
     Insert.
