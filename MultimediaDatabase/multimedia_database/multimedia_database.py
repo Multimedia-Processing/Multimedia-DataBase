@@ -96,9 +96,11 @@ class Insert():
         將指定媒體在讀取資訊後將YAML儲存到指定的目錄底下。
         """
         data = MI.read_file_info(path=media_path)
+        data.update({'hash': hash_value})
         yaml_data = yaml.dump(data).encode('utf8')
         HM.save_file(text=yaml_data,
-                     path=self.mmdb_path_object, encoding='utf8')
+                     path=self.mmdb_path + self.mmdb_path_object,
+                     encoding='utf8', mode='w')
         return HM.hashfilename
 
     def multimedia_folder_hash(self, table='Table.yaml'):
