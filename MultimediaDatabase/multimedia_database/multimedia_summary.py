@@ -107,18 +107,10 @@ class HashMultimedia():
                        path=output_path,
                        encoding=self.encoding,
                        mode=self.mode)
-        if folder or file:
-            if folder is True:
-                self.filename = input_path
-
-            elif file is True:
-                self.filename = ""
-                i = -1
-                while input_path[i] != "/":
-                    i -= 1
-                self.filename = input_path[i + 1:]
-
-            print(self.filename, self.hashfilename)
+        self.filename = self.path_string_extraction(
+            text=input_path, folder=folder, file=file
+        )
+        print(self.filename, self.hashfilename, '\n')
 
     def multimedia_folder_hash(self, input_path='../__mpdlcache__/',
                                output_path='../__mmdb__/object/'):
@@ -131,6 +123,41 @@ class HashMultimedia():
         for multimedia in multimedias:
             self.multimedia_hash(input_path=input_path + multimedia,
                                  output_path=output_path)
+
+    @classmethod
+    def path_string_extraction(cls, text='abcd/efgh.mp4',
+                               folder=False, file=True, file_extension=True):
+        """
+        針對路徑擷取指定的檔名.
+
+        將輸入的路徑依照參數去控制檔名的擷取方式。
+        folder:True=有路徑，False=沒路徑
+        file:True=有檔名，False=沒檔名，回傳None
+        file_extension:True=有副檔名，False=沒副檔名
+        """
+        if folder is True:
+            no_folder = -1
+            while text[no_folder] != "/":
+                no_folder -= 1
+            name_folder = text[:no_folder + 1]
+        else:
+            no_folder = 0
+            name_folder = text[:no_folder]
+
+        no_filename_extension = -1
+        if file_extension is True and "." in text:
+            while text[no_filename_extension] != ".":
+                no_filename_extension -= 1
+        else:
+            no_filename_extension = 0
+        name_file_extension = text[no_filename_extension:]
+
+        if file is True:
+            name_file = text[no_folder + 1:no_filename_extension]
+            name = name_folder + name_file + name_file_extension
+        else:
+            name = text
+        return name
 
 
 if __name__ == '__main__':
