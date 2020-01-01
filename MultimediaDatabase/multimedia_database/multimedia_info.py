@@ -42,13 +42,7 @@ class MultimediaInfo():
         kwargs.setdefault('info', self.info_data)
         kwargs.setdefault('feature', None)
         if kwargs['name'] is None:
-            no_path = -1
-            while path[no_path] != "/":
-                no_path -= 1
-            no_filename_extension = -1
-            while path[no_filename_extension] != ".":
-                no_filename_extension -= 1
-            name = path[no_path + 1:no_filename_extension]
+            name = HM.path_string_extraction(file_extension=False)
             kwargs.update({'name': name})
         return kwargs
 
