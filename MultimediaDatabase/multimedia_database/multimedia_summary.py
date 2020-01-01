@@ -30,18 +30,18 @@ class HashMultimedia():
         self.filename = None
 
     @classmethod
-    def read_file(cls, path='../.temp/None.mp4',
+    def read_file(cls, path='../__mpdlcache__/None.mp4',
                   encoding=None, mode='rb', size=-1):
         """
-        讀取文件檔案並計算雜湊值.
+        讀取文件檔案.
 
         指定檔案路徑，將裡面的內容依照參數回傳。
         """
         with open(path, mode=mode, encoding=encoding) as text:
             return text.read(size)
 
-    def save_file(self, text,
-                  path='../.mmdb/object/', encoding=None, mode='wb'):
+    def save_file(self, text, path='../__mmdb__/object/',
+                  encoding=None, mode='wb'):
         """
         雜湊二進位檔案後存檔.
 
@@ -54,7 +54,7 @@ class HashMultimedia():
             file.write(text)
 
     @classmethod
-    def scan_folder(cls, path='../.temp/'):
+    def scan_folder(cls, path='../__mpdlcache__/'):
         """
         掃描目錄底下的檔案名稱並回傳.
 
@@ -64,26 +64,26 @@ class HashMultimedia():
         return multimedias
 
     @classmethod
-    def remove_file(cls, path="../.temp/None.mp4"):
+    def remove_file(cls, path="../__mpdlcache__/None.mp4"):
         """
         刪除指定路徑的目錄內檔案.
 
-        預設是.temp目錄底下刪除。
+        預設是__mpdlcache__目錄底下刪除。
         """
         os.remove(path)
 
-    def remove_folder(self, path="../.temp/"):
+    def remove_folder(self, path="../__mpdlcache__/"):
         """
         刪除指定路徑的目錄內檔案.
 
-        預設是.temp目錄底下刪除。
+        預設是__mpdlcache__目錄底下刪除。
         """
         multimedias = self.scan_folder(path=path)
         for multimedia in multimedias:
             self.remove_file(path + multimedia)
 
-    def multimedia_hash(self, input_path='./.temp/None.mp4',
-                        output_path='./.mmdb/object/',
+    def multimedia_hash(self, input_path='../__mpdlcache__/None.mp4',
+                        output_path='../__mmdb__/object/',
                         file=True,
                         folder=False):
         """
@@ -115,8 +115,8 @@ class HashMultimedia():
 
             print(self.filename, self.hashfilename)
 
-    def multimedia_folder_hash(self, input_path='../.temp/',
-                               output_path='../.mmdb/object/'):
+    def multimedia_folder_hash(self, input_path='../__mpdlcache__/',
+                               output_path='../__mmdb__/object/'):
         """
         自動化目錄雜湊.
 
