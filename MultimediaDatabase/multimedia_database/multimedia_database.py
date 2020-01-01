@@ -88,7 +88,8 @@ class Insert():
         self.mmdb_path_object = "object/"
         self.mmdb_path_table = "table/"
 
-    def save_info_yaml(self, media_path='../__mpdlcache__/None.mp4'):
+    def save_info_yaml(self, hash_value=None,
+                       media_path='../__mpdlcache__/None.mp4'):
         """
         儲存媒體資訊.
 
@@ -100,32 +101,7 @@ class Insert():
                      path=self.mmdb_path_object, encoding='utf8')
         return HM.hashfilename
 
-    @classmethod
-    def multimedia_folder_hash_csv(cls, input_path='../.temp/',
-                                   output_path='../.mmdb/object/',
-                                   save_path='../.mmdb/info/info.csv'):
-        """
-        檔案與雜湊值對應CSV.
-
-        將檔案雜湊後得出的雜湊值與檔名搭配後存入CSV檔
-        """
-        multimedias = HM.scan_folder(path=input_path)
-        for multimedia in multimedias:
-            HM.multimedia_hash(input_path=input_path + multimedia,
-                               output_path=output_path)
-
-            with open(save_path,
-                      mode='a', newline='', encoding='utf8') as csvfile:
-                # 建立 CSV 檔寫入器g
-                writer = csv.writer(csvfile)
-
-                # 寫入一列資料
-                writer.writerow([HM.hashfilename, HM.filename])
-
-    @classmethod
-    def multimedia_folder_hash_yaml(cls, input_path='../.temp/',
-                                    output_path='../.mmdb/object/',
-                                    save_path='../.mmdb/info/info.csv'):
+    def multimedia_folder_hash(self, table='Table.yaml'):
         """
         檔案、雜湊值與檔案資訊資料表.
 
@@ -147,4 +123,4 @@ class Insert():
 
 if __name__ == '__main__':
     MMDB = Insert()
-    MMDB.multimedia_folder_hash_csv()
+    MMDB.multimedia_folder_hash()
