@@ -37,13 +37,18 @@ class MultimediaInfo():
             ffprobe=ffprobe, includeMissing=True, rawMode=True)
         self.info_data = parser.parseFfprobe(path)
         self.info_data.pop('path')
+        self.info_data.update({'extension': None})
         kwargs.setdefault('hash', None)
         kwargs.setdefault('name', None)
         kwargs.setdefault('info', self.info_data)
         kwargs.setdefault('feature', None)
         if kwargs['name'] is None:
-            name = HM.path_string_extraction(file_extension=False)
+            name = HM.path_string_extraction(
+                text=path, folder=False, file=True, file_extension=False)
+            extension = HM.path_string_extraction(
+                text=path, folder=False, file=False, file_extension=True)
             kwargs.update({'name': name})
+            kwargs['info'].update({'extension': extension})
         return kwargs
 
     def read_folder_info(self, path='../__mpdlcache__/'):
