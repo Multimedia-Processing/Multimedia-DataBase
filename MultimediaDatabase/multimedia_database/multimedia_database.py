@@ -148,27 +148,25 @@ class Insert():
         快速檢查:不重新計算object雜湊值，比對資料表。
         慢速檢查:重新計算object雜湊值，比對資料表。
         """
-        tables = HM.scan_folder(
-            path=self.mmdb_path + self.mmdb_path_table)
-        multimedias = HM.scan_folder(
-            path=self.mpdlcache_path)
-        for table in tables:
+        multimedias = list()
+        for table in HM.scan_folder(
+                path=self.mmdb_path + self.mmdb_path_table):
             table_file = self.mmdb_path + self.mmdb_path_table + table
             file_extension = HM.path_string_extraction(
                 text=table_file, folder=False, file=False, file_extension=True)
             if file_extension == ".yaml":
-                yamlfile = HM.read_file(
-                    path=table_file, mode='r', encoding='utf8')
-                data = yaml.load(yamlfile)
+                data = yaml.unsafe_load(
+                    HM.read_file(
+                        path=table_file, mode='r', encoding='utf8'))
                 for row in data:
                     info_object = self.mmdb_path + \
-                        self.mmdb_path_table + row['info']
-                    yamlfile = HM.read_file(
-                        path=info_object, mode='r', encoding='utf8')
-                    info_data = yaml.load(yamlfile)
-                    name = info_data['name']
-                    if name in multimedias:
-                        multimedias.pop(name)
+                        self.mmdb_path_object + row['info']
+                    info_data = yaml.unsafe_load(
+                        HM.read_file(
+                            path=info_object, mode='r', encoding='utf8'))
+                    name = info_data['name'] + info_data['info']['extension']
+                    if name not in HM.scan_folder(path=self.mpdlcache_path):
+                        multimedias.append(name)
         return multimedias
 
 
