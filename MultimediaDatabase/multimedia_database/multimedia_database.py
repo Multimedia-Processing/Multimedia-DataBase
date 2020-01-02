@@ -126,12 +126,14 @@ class Insert():
                                         hash=HM.hashfilename,
                                         info=info_hash,
                                         feature=None)
-
             elif file_extension == ".yaml":
                 Create.create_table_yaml(save_path=save_table_path,
                                          hash=media_hash,
                                          info=info_hash,
                                          feature=None)
+            else:
+                return False
+        return True
 
     def check_database(self):
         """
