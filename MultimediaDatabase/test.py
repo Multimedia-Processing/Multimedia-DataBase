@@ -95,5 +95,5 @@ def test_check_database():
 
 def test_multimedia_folder_hash():
     """測試fun multimedia_folder_hash."""
-    INSERT.multimedia_folder_hash()
+    INSERT.multimedia_folder_hash(table='Table.yaml')
     assert True
