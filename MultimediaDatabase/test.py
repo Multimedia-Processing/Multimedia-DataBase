@@ -32,22 +32,25 @@ def test_path_string_extraction():
 
     測試檔案輸出與輸入是否一樣
     """
-    name = HM.path_string_extraction(
-        folder=True, file=True, file_extension=False)
-    if name == 'abcd/efgh.mp4':
-        name = HM.path_string_extraction(
-            folder=False, file=True, file_extension=True
-        )
-        if name == 'efgh.mp4':
-            name = HM.path_string_extraction(
-                folder=False, file=True, file_extension=False
-            )
-            if name == 'efgh':
-                name = HM.path_string_extraction(
-                    folder=False, file=False, file_extension=True
-                )
-                if name == '.mp4':
-                    assert True
+    text = 'abcd/efgh.mp4'
+    test_list = [
+        (False, False, False, ''),
+        (False, False, True, '.mp4'),
+        (False, True, False, 'efgh'),
+        (False, True, True, 'efgh.mp4'),
+        (True, False, False, 'abcd/'),
+        (True, False, True, 'abcd/.mp4'),
+        (True, True, False, 'abcd/efgh'),
+        (True, True, True, 'abcd/efgh.mp4'),
+    ]
+    for folder, file, file_extension, path in test_list:
+        name = hm.path_string_extraction(
+            text=text, folder=folder, file=file, file_extension=file_extension)
+        print('\n', path, name)
+        if name == path:
+            assert True
+        else:
+            assert False
 
 
 def test_read_file_info():
