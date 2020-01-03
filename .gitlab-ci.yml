@@ -19,25 +19,32 @@ cache:
     - venv/
 
 before_script:
+  - apt-get update -yq
+  - apt-get upgrade -y
+  - apt-get install ffmpeg -y
   - python -V  # Print out python version for debugging
   - pip install virtualenv
   - virtualenv venv
   - source venv/bin/activate
+  - pip install flake8
+  - pip install pytest
+  - pip install pylint
+  - pip install PyYAML
+  - pip install ruamel.yaml
+  - pip install PyProbe
 
 flake8:
   script:
-    - pip install flake8  # you can flake8
     - flake8 MultimediaDatabase/
 
 pytest:
   script:
-    - pip install pytest  # you can pytest
-    - pytest -v MultimediaDatabase/manage.py
+    - cd MultimediaDatabase/
+    - pytest -vs test.py
 
 pylint:
   script:
-    - pip install pylint  # you can pytest
-    - pylint -v MultimediaDatabase/manage.py
+    - pylint -v MultimediaDatabase/test.py
     - pylint -v MultimediaDatabase/multimedia_database/
 
 pages:
@@ -49,4 +56,4 @@ pages:
     paths:
       - public
   only:
-    - master
+    - develop
