@@ -40,7 +40,7 @@ class Create():
     @classmethod
     def create_table_csv(cls,
                          save_path='__mmdb__/table/table.csv',
-                         mode='a', newline='', encoding='utf8', **kwargs,):
+                         mode='a', newline='', encoding='utf8', **kwargs):
         """
         建立CSV.
 
@@ -60,8 +60,7 @@ class Create():
 
     @classmethod
     def create_table_yaml(cls,
-                          save_path='../__mmdb__/table/Table.yaml',
-                          mode='a', newline='', encoding='utf8', **kwargs,):
+                          mode='a', newline='', encoding='utf8', **kwargs):
         """
         建立YAML.
 
