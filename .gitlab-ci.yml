@@ -48,14 +48,3 @@ pylint:
   script:
     - pylint -v MultimediaDatabase/test.py
     - pylint -v MultimediaDatabase/multimedia_database/
-
-pages:
-  script:
-    - pip install sphinx sphinx-rtd-theme
-    - cd doc ; make html
-    - mv build/html/ ../public/
-  artifacts:
-    paths:
-      - public
-  only:
-    - develop
