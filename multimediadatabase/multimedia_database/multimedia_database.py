@@ -115,9 +115,10 @@ class Insert():
 
         將檔案雜湊後得出的雜湊值與檔名搭配後存入YAML。
         """
+        create = Create(mmdb_path=self.mmdb_path,
+                        mpdlcache_path=self.mpdlcache_path)
         file_extension = HM.path_string_extraction(
             text=table, folder=False, file=False, file_extension=True)
-        save_table_path = self.mmdb_path + self.mmdb_path_table + table
         multimedias = self.check_database()
         for multimedia in multimedias:
             HM.multimedia_hash(
@@ -128,12 +129,12 @@ class Insert():
                 hash_value=HM.hashfilename,
                 media_path=self.mpdlcache_path + multimedia)
             if file_extension == ".csv":
-                Create.create_table_csv(save_path=save_table_path,
+                create.create_table_csv(save_path=table,
                                         hash=HM.hashfilename,
                                         info=info_hash,
                                         feature=None)
             elif file_extension == ".yaml":
-                Create.create_table_yaml(save_path=save_table_path,
+                create.create_table_yaml(name=table,
                                          hash=media_hash,
                                          info=info_hash,
                                          feature=None)
