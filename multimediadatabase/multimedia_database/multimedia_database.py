@@ -58,8 +58,7 @@ class Create():
             writer.writerow(
                 [kwargs['hash'], kwargs['info'], kwargs['feature']])
 
-    @classmethod
-    def create_table_yaml(cls,
+    def create_table_yaml(self, name='Table.yaml',
                           mode='a', newline='', encoding='utf8', **kwargs):
         """
         建立YAML.
@@ -74,7 +73,7 @@ class Create():
             'info': kwargs['info'],
             'feature': kwargs['feature']
         }]
-        with open(save_path,
+        with open(self.mmdb_path + self.mmdb_path_table + name,
                   mode=mode, newline=newline, encoding=encoding) as yamlfile:
             # 建立 CSV 檔寫入器
             yaml.dump(table, yamlfile)
