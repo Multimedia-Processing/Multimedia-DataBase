@@ -35,7 +35,7 @@ before_script:
 
 flake8:
   script:
-    - flake8 MultimediaDatabase/
+    - flake8 multimediadatabase/
 
 pytest:
   script:
@@ -44,5 +44,4 @@ pytest:
 
 pylint:
   script:
-    - pylint -v MultimediaDatabase/test.py
-    - pylint -v MultimediaDatabase/multimedia_database/
+    - pylint -v multimediadatabase/
