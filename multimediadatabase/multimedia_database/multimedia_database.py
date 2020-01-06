@@ -160,7 +160,7 @@ class Insert():
             path=self.mmdb_path + self.mmdb_path_table)
         if len(mmdb_table_list) <= 1 and "table.md" in mmdb_table_list:
             multimedias = HM.scan_folder(path=self.mpdlcache_path)
-        elif len(mmdb_table_list) <= 0 and "table.md" not in mmdb_table_list:
+        elif mmdb_table_list and "table.md" not in mmdb_table_list:
             multimedias = HM.scan_folder(path=self.mpdlcache_path)
 
         for table in mmdb_table_list:
