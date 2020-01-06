@@ -156,24 +156,33 @@ class Insert():
         慢速檢查:重新計算object雜湊值，比對資料表。
         """
         multimedias = list()
-        for table in HM.scan_folder(
-                path=self.mmdb_path + self.mmdb_path_table):
+        mmdb_table_list = HM.scan_folder(
+            path=self.mmdb_path + self.mmdb_path_table)
+        if len(mmdb_table_list) <= 1 and "table.md" in mmdb_table_list:
+            multimedias = HM.scan_folder(path=self.mpdlcache_path)
+        elif len(mmdb_table_list) <= 0 and "table.md" not in mmdb_table_list:
+            multimedias = HM.scan_folder(path=self.mpdlcache_path)
+
+        for table in mmdb_table_list:
             table_file = self.mmdb_path + self.mmdb_path_table + table
             file_extension = HM.path_string_extraction(
-                text=table_file, folder=False, file=False, file_extension=True)
+                text=table_file,
+                folder=False, file=False, file_extension=True)
             if file_extension == ".yaml":
                 data = yaml.unsafe_load(
                     HM.read_file(
                         path=table_file, mode='r', encoding='utf8'))
                 for row in data:
-                    info_object = self.mmdb_path + \
-                        self.mmdb_path_object + row['info']
-                    info_data = yaml.unsafe_load(
-                        HM.read_file(
-                            path=info_object, mode='r', encoding='utf8'))
-                    name = info_data['name'] + info_data['info']['extension']
-                    if name not in HM.scan_folder(path=self.mpdlcache_path):
-                        multimedias.append(name)
+                    if row['info'] is not None:
+                        info_object = self.mmdb_path + \
+                            self.mmdb_path_object + row['info']
+                        info_data = yaml.unsafe_load(
+                            HM.read_file(
+                                path=info_object, mode='r', encoding='utf8'))
+                        name = info_data['name'] + \
+                            info_data['info']['extension']
+                        if name not in multimedias:
+                            multimedias.append(name)
         return multimedias
 
 
