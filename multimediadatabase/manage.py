@@ -3,8 +3,7 @@
 
 多媒體資料庫主控台。
 """
-from .multimedia_database.multimedia_info import MultimediaInfo as mi
-from .multimedia_database.multimedia_summary import HashMultimedia as hm
+from multimedia_database.multimedia_database import Insert
 
-mi()
-hm()
+INSERT = Insert(mmdb_path='__mmdb__/', mpdlcache_path='__mpdlcache__/')
+INSERT.multimedia_folder_hash(table='Table.yaml')
