@@ -182,5 +182,6 @@ remark:
   - !!list
   - !!str
   - !!dirt
+production date: !!int
 
 ```
