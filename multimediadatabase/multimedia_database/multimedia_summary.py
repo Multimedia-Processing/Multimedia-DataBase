@@ -161,6 +161,20 @@ class HashMultimedia():
         name = name_folder + name_file + name_file_extension
         return name
 
+    def hash_folder(self):
+        """針對取指定的目錄底下計算所有檔案的雜湊值."""
+        path = '../../Transfer/VIDEO_TS/' + \
+            'B685AA138328BB197B1E600841497A1862E22A110087C889B3ADD6E485A8CC00/'
+        mulitmedias = self.scan_folder(path)
+        all_text = b''
+        for multimedia in mulitmedias:
+            text = self.read_file(path=path + multimedia)
+            all_text += text
+            print(sha256(text).hexdigest(), multimedia)
+
+        all_text = sha256(all_text).hexdigest()
+        print(all_text)
+
 
 if __name__ == '__main__':
     HM = HashMultimedia()
