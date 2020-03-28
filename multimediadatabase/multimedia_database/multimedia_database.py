@@ -28,7 +28,13 @@
 """
 # Disable all the no-member violations in this function
 # pylint: disable=R0205
+import os
+
+import shutil
+
 import csv
+
+from os import walk
 
 import yaml
 
@@ -41,9 +47,95 @@ MI = MultimediaInfo()
 HM = HashMultimedia()
 
 
-class Create():
+class DataBase(object):
+    """Docstring for database manage class.
+
+    A category for managing databases.Create a new database, enter the path,
+    database name, and default table name.
     """
-    Create.
+
+    def __init__(self, path='../../', name='__mmdb__'):
+        """Init."""
+        super(DataBase, self).__init__()
+        self.path = path
+        self.database_name = name
+        self.table = "table"
+        self.object = "object"
+        self.mmdb_md = "mmdb.md"
+        self.object_md = "object.md"
+        self.table_md = "table.md"
+
+    def create_database(self):
+        """Create DataBase."""
+        try:
+            os.makedirs(name=self.path + self.database_name, exist_ok=False)
+            os.makedirs(name=self.path + self.database_name + self.table,
+                        exist_ok=False)
+            os.makedirs(name=self.path + self.database_name + self.object,
+                        exist_ok=False)
+            shutil.copyfile(self.mmdb_md, self.path +
+                            self.database_name + self.mmdb_md)
+            shutil.copyfile(self.table_md, self.path +
+                            self.database_name + self.table + self.table_md)
+            shutil.copyfile(self.table_md, self.path +
+                            self.database_name + self.object + self.object_md)
+
+        except FileExistsError:
+            print('The directory already has a multimedia library or a \
+                directory of the same name.')
+
+    def drop_database(self):
+        """Drop DataBase."""
+        ask = str(input("Are you sure you want to continue?(yes/no)"))
+        try:
+            if ask == 'yes':
+                shutil.rmtree(path=self.path + self.database_name,
+                              ignore_errors=False)
+            elif ask == 'no':
+                print('Failed to delete database.')
+            else:
+                print("Your input is not one of the options.")
+                assert False
+        except FileExistsError:
+            print('The database does not exist.')
+
+    def rename_database(self):
+        """Rename DataBase."""
+        try:
+            ask = str(input())
+            if ask == 'yes':
+                shutil.rmtree(path=self.path + self.database_name,
+                              ignore_errors=False)
+            elif ask == 'no':
+                print('Failed to delete database.')
+            else:
+                assert False
+        except FileExistsError:
+            print('The database does not exist.')
+
+    def show_database(self):
+        """Show DataBase.
+
+        搜尋指定目錄底下所有的多媒體資料庫。
+        """
+        try:
+            for root, dirs, files in walk(self.path):
+                if self.mmdb_md in files \
+                        and self.table in dirs \
+                        and self.object in dirs:
+                    root_table = os.listdir(root + self.table)
+                    root_object = os.listdir(root + self.object)
+                    if self.table_md in root_table \
+                            and self.object_md in root_object:
+                        database_name = root.split('/')
+                        print('資料庫:', database_name[-1])
+
+        except FileExistsError:
+            print('The database does not exist.')
+
+
+class Table(object):
+    u"""Create.
 
     新增資料表到資料庫。
     """
@@ -96,9 +188,8 @@ class Create():
             yaml.dump(table, yamlfile)
 
 
-class Insert():
-    """
-    Insert.
+class Date(object):
+    u"""Insert.
 
     新增多媒體資料到資料庫。
     """
@@ -113,7 +204,6 @@ class Insert():
 
     def save_info_yaml(self, hash_value=None,
                        media_path='../__mpdlcache__/None.mp4'):
-        """
         """儲存媒體資訊.
 
         將指定媒體在讀取資訊後將YAML儲存到指定的目錄底下。
@@ -127,13 +217,12 @@ class Insert():
         return HM.hashfilename
 
     def multimedia_folder_hash(self, table='Table.yaml'):
-        """
-        檔案、雜湊值與檔案資訊資料表.
+        """檔案、雜湊值與檔案資訊資料表.
 
         將檔案雜湊後得出的雜湊值與檔名搭配後存入YAML。
         """
-        create = Create(mmdb_path=self.mmdb_path,
-                        mpdlcache_path=self.mpdlcache_path)
+        create = Table(mmdb_path=self.mmdb_path,
+                       mpdlcache_path=self.mpdlcache_path)
         file_extension = HM.path_string_extraction(
             text=table, folder=False, file=False, file_extension=True)
         multimedias = self.check_database()
@@ -203,5 +292,5 @@ class Insert():
 
 
 if __name__ == '__main__':
-    MMDB = Insert()
+    MMDB = Date()
     MMDB.multimedia_folder_hash()
