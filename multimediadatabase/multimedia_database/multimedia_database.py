@@ -1,5 +1,4 @@
-"""
-「多媒體資料庫模組」(Multimedia DataBase Module).
+"""「多媒體資料庫模組」(Multimedia DataBase Module).
 
 - 運作:可利用Python函式與套件去呼叫與執行套件。
 - 佈署:可利用Python函式與套件去呼叫與執行套件去建立新的資料庫。
@@ -27,9 +26,14 @@
 - 修改:更新資料庫裡面的資料，提供更新資料、多媒體、物件與參照。
 - 查詢:查詢資料庫內容，並且依需求將資料匯出。
 """
+# Disable all the no-member violations in this function
+# pylint: disable=R0205
 import csv
+
 import yaml
+
 from .multimedia_info import MultimediaInfo
+
 from .multimedia_summary import HashMultimedia
 
 
@@ -56,8 +60,7 @@ class Create():
     def create_table_csv(cls,
                          save_path='__mmdb__/table/table.csv',
                          mode='a', newline='', encoding='utf8', **kwargs):
-        """
-        建立CSV.
+        """建立CSV.
 
         將用於建立CSV檔，並提供在尾端新增資料的功能。
         """
@@ -75,8 +78,7 @@ class Create():
 
     def create_table_yaml(self, name='Table.yaml',
                           mode='a', newline='', encoding='utf8', **kwargs):
-        """
-        建立YAML.
+        """建立YAML.
 
         將用於建立YAML檔，並提供在尾端新增資料的功能。
         """
@@ -112,7 +114,7 @@ class Insert():
     def save_info_yaml(self, hash_value=None,
                        media_path='../__mpdlcache__/None.mp4'):
         """
-        儲存媒體資訊.
+        """儲存媒體資訊.
 
         將指定媒體在讀取資訊後將YAML儲存到指定的目錄底下。
         """
@@ -158,8 +160,7 @@ class Insert():
         return True
 
     def check_database(self):
-        """
-        資料庫檢查.
+        """資料庫檢查.
 
         檢查資料表、物件以及暫存檔之間是否正確連結。
         會先檢查資料表與物件之間的關聯，再來會確定暫存檔是否已經進資料庫。

@@ -7,19 +7,18 @@
 
 
 import os
+
 from hashlib import sha256
 
 
 class HashMultimedia():
-    """
-    雜湊多媒體檔案類別.
+    """雜湊多媒體檔案類別.
 
     提供讀取、寫入、輸出等自動化操作，並提供API使用.
     """
 
     def __init__(self, encoding=None, mode="rb", size=-1):
-        """
-        初始化類別.
+        """初始化類別.
 
         選擇自己喜歡的雜湊函數，提供其他函式使用。
         """
@@ -33,8 +32,7 @@ class HashMultimedia():
     @classmethod
     def read_file(cls, path='../__mpdlcache__/None.mp4',
                   encoding=None, mode='rb', size=-1):
-        """
-        讀取文件檔案.
+        """讀取文件檔案.
 
         指定檔案路徑，將裡面的內容依照參數回傳。
         """
@@ -43,8 +41,7 @@ class HashMultimedia():
 
     def save_file(self, text, path='../__mmdb__/object/',
                   encoding=None, mode='wb'):
-        """
-        雜湊二進位檔案後存檔.
+        """雜湊二進位檔案後存檔.
 
         針對輸入的文字雜湊儲存成雜湊值名稱檔案。
         輸入文字、存檔路徑、編碼格式轉成沒有檔名為雜湊值且沒有副檔名。
@@ -60,8 +57,7 @@ class HashMultimedia():
 
     @classmethod
     def scan_folder(cls, path='../__mpdlcache__/'):
-        """
-        掃描目錄底下的檔案名稱並回傳.
+        """掃描目錄底下的檔案名稱並回傳.
 
         針對指定的目錄位置底下掃描檔案，回傳序列。
         """
@@ -70,16 +66,14 @@ class HashMultimedia():
 
     @classmethod
     def remove_file(cls, path="../__mpdlcache__/None.mp4"):
-        """
-        刪除指定路徑的目錄內檔案.
+        """刪除指定路徑的目錄內檔案.
 
         預設是__mpdlcache__目錄底下刪除。
         """
         os.remove(path)
 
     def remove_folder(self, path="../__mpdlcache__/"):
-        """
-        刪除指定路徑的目錄內檔案.
+        """刪除指定路徑的目錄內檔案.
 
         預設是__mpdlcache__目錄底下刪除。
         """
@@ -91,8 +85,7 @@ class HashMultimedia():
                         output_path='../__mmdb__/object/',
                         file=True,
                         folder=False):
-        """
-        雜湊指定的多媒體.
+        """雜湊指定的多媒體.
 
         讀取指定的多媒體時會以二進位的方式讀取，並將檔案以雜湊函數計算後的雜湊值製作成
         檔名，並同時取消副檔名。
@@ -127,8 +120,7 @@ class HashMultimedia():
     @classmethod
     def path_string_extraction(cls, text='abcd/efgh.mp4',
                                folder=False, file=True, file_extension=True):
-        """
-        針對路徑擷取指定的檔名.
+        """針對路徑擷取指定的檔名.
 
         將輸入的路徑依照參數去控制檔名的擷取方式。
         folder:True=有路徑，False=沒路徑
