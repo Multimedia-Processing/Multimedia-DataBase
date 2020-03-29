@@ -108,3 +108,12 @@ def test_multimedia_folder_hash():
     insert = Insert(mmdb_path='__mmdb__/', mpdlcache_path='__mpdlcache__/')
     insert.multimedia_folder_hash(table='Table.yaml')
     assert True
+
+
+def test_create_table_csv():
+    """測試fun multimedia_folder_hash."""
+    create = Create(
+        mmdb_path='__mmdb__/', mpdlcache_path='__mpdlcache__/')
+    create.create_table_csv(name='Table.csv')
+    hm.remove_file(path='__mmdb__/table/Table.yaml')
+    assert True
