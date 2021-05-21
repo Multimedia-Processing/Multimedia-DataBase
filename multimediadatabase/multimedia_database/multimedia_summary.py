@@ -107,8 +107,7 @@ class HashMultimedia():
 
     def multimedia_folder_hash(self, input_path='../__mpdlcache__/',
                                output_path='../__mmdb__/object/'):
-        """
-        自動化目錄雜湊.
+        """自動化目錄雜湊.
 
         指定路徑讀取目錄底下檔案再指定目錄轉出以檔案雜湊值為檔名的檔案.
         """

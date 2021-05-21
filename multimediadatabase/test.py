@@ -4,9 +4,13 @@
 多媒體資料庫主控台。
 """
 import yaml
+
 from multimedia_database.multimedia_info import MultimediaInfo as mi
+
 from multimedia_database.multimedia_summary import HashMultimedia as hm
+
 from multimedia_database.multimedia_database import Insert
+
 from multimedia_database.multimedia_database import Create
 
 NONE_MP4 = "894fad667b74fcff03aaa2f55cf933de1b9fd9663b1e5c0ff80fc6b44fa9542a"
